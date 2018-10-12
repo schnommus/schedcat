@@ -1,0 +1,16 @@
+rtspin -w 158 900 $TEST_DURATION &
+rtspin -w 4 600 $TEST_DURATION &
+rtspin -w 27 600 $TEST_DURATION &
+rtspin -w 73 1500 $TEST_DURATION &
+rtspin -w 15 600 $TEST_DURATION &
+rtspin -w 151 1500 $TEST_DURATION &
+rtspin -w 23 1200 $TEST_DURATION &
+rtspin -w 606 2400 $TEST_DURATION &
+rtspin -w 418 600 $TEST_DURATION &
+rtspin -w 7 3000 $TEST_DURATION &
+rtspin -w 669 2400 $TEST_DURATION &
+rtspin -w 15 300 $TEST_DURATION &
+rtspin -w 123 2100 $TEST_DURATION &
+rtspin -w 81 600 $TEST_DURATION &
+rtspin -w 151 1500 $TEST_DURATION &
+rtspin -w 1 3000 $TEST_DURATION &

@@ -53,6 +53,7 @@ from schedcat.overheads.jlfp import quantize_params
 import random
 
 NAMED_PERIODS = {
+                    'uni-tiny'      : (1, 5),
                     'uni-short'     : (3, 33),
                     'uni-moderate'  : (10, 100),
                     'uni-long'      : (50, 250),

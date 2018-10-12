@@ -15,20 +15,42 @@ import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
 
-def get_overheads(n):
+# Cycles to microseconds
+SCALE = 30 * (1 / (3e9 * 1e-6))
+
+def get_oh_ideal():
     oh = Overheads()
-    oh.ctx_switch = const(n)
+    oh.ctx_switch = const(0)
+    return oh
+
+def get_oh_litmus():
+    oh = Overheads()
+    oh.ctx_switch = const(3000*SCALE)
+    oh.schedule = const(5500*SCALE)
+    oh.release = const(12000*SCALE)
+    oh.ipi_latency = const(10000*SCALE)
+    oh.release_latency = const(10000*SCALE)
+    return oh
+
+def get_oh_us():
+    oh = Overheads()
+    oh.ctx_switch = const(2800*SCALE)
+    oh.schedule = const(3275*SCALE)
+    oh.release = const(8829*SCALE)
+    oh.ipi_latency = const(2372*SCALE)
+    oh.release_latency = const(5000*SCALE)
     return oh
 
 n_tasks = 10
-n_cpus = 2
+n_cpus = 4
 dedicated_irq = True
 utilisation_inc = 0.05
-tests_per_utilisation = 10
+tests_per_utilisation = 100
 
 all_overheads = {
-        'ctx_switch=0': get_overheads(0),
-        'ctx_switch=100': get_overheads(1000),
+        'LITMUS (4-GEDF)': get_oh_litmus(),
+        'Us (4-GEDF)': get_oh_us(),
+        'Ideal (4-GEDF)': get_oh_ideal(),
         }
 
 fig, ax = plt.subplots()
@@ -41,7 +63,7 @@ for oh in all_overheads.keys():
 
         for _ in range(tests_per_utilisation):
 
-            ts = generator.gen_taskset('uni-moderate', 'unif', n_tasks, gen_utilisation)
+            ts = generator.gen_taskset('uni-short', 'unif', n_tasks, gen_utilisation)
             for t in ts:
                 t.wss = 0
 
